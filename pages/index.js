@@ -6,7 +6,7 @@ export default function IndexPage() {
     <div>
       <Nav />
       <div className="container mx-auto py-20">
-        <h1 className="text-5xl text-center text-accent-1">
+        <h1 className="text-5xl text-center text-accent-1 pb-8">
           CoinGecko Data Simple Viewer
         </h1>
         <CoinGecko />
