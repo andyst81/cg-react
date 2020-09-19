@@ -55,12 +55,10 @@ class CoinGecko extends React.Component {
             {data.map(item => (
               <tr key={item.name}>
                 <td className="border px-4 py-2">{item.market_cap_rank}</td>
-                <td className="border px-4 py-2"><img src={item.image} alt='coin name' width='20' /></td>
+                <td className="border px-4 py-2 items-center"><img className='justify-center' src={item.image} alt='coin name' width='20' /></td>
                 <td className="border px-4 py-2">
-                    <a className='text-purple-600 font-medium hover:text-red-900' href={'https://www.coingecko.com/en/coins/' + item.id}>
-
+                    <a className='text-purple-600 font-medium hover:text-red-800' href={'https://www.coingecko.com/en/coins/' + item.id}>
                       {item.name}
-
                     </a>
                 </td>
                 <td className="border px-4 py-2">${Math.round(item.current_price * 1000) / 1000}</td>
