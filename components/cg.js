@@ -4,7 +4,10 @@ class CoinGecko extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      data: []
+      data: [],
+      hour: true,
+      day: true,
+      week: true
     };
   }
 
@@ -38,37 +41,47 @@ class CoinGecko extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className='containter mx-auto flex items-center justify-center'>
-          <table className='table-auto'>
-            <thead className='text-xl'>
-              <tr>
-                <th className="px-4 py-2">Position</th>
-                <th className="px-4 py-2">Symbol</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Price (USD)</th>
-                <th className="px-4 py-2">% Change in 1h</th>
-                <th className="px-4 py-2">% Change in 24h</th>
-                <th className="px-4 py-2">% Change in 7d</th>
-              </tr>
-            </thead>
-            <tbody>
-            {data.map(item => (
-              <tr key={item.name}>
-                <td className="border px-4 py-2">{item.market_cap_rank}</td>
-                <td className="border px-4 py-2 items-center"><img className='justify-center' src={item.image} alt='coin name' width='20' /></td>
-                <td className="border px-4 py-2">
-                    <a className='text-purple-600 font-medium hover:text-red-800' href={'https://www.coingecko.com/en/coins/' + item.id}>
-                      {item.name}
-                    </a>
-                </td>
-                <td className="border px-4 py-2">${Math.round(item.current_price * 1000) / 1000}</td>
-                <td className={item.price_change_percentage_1h_in_currency >= 0 ? 'text-green-500 border px-4 py-2' : 'text-red-500 border px-4 py-2'}>{Math.round(item.price_change_percentage_1h_in_currency * 100) / 100}%</td>
-                <td className={item.price_change_percentage_24h_in_currency >= 0 ? 'text-green-500 border px-4 py-2' : 'text-red-500 border px-4 py-2'}>{Math.round(item.price_change_percentage_24h_in_currency * 100) / 100}%</td>
-                <td className={item.price_change_percentage_7d_in_currency >= 0 ? 'text-green-500 border px-4 py-2' : 'text-red-500 border px-4 py-2'}>{Math.round(item.price_change_percentage_7d_in_currency * 100) / 100}%</td>
-              </tr>
-          ))}
-            </tbody>
-          </table>
+        <div>
+          <div>
+            <input type="checkbox" id="hour" name="hour" value="1 Hour" />
+            <label for="hour">Remove 1 hour change</label>
+            <input type="checkbox" id="day" name="day" value="1 Day" />
+            <label for="day">Remove 24 hour change</label>
+            <input type="checkbox" id="week" name="week" value="1 Week" />
+            <label for="week">Remove 7 day change</label>
+          </div>
+          <div className='container mx-auto flex items-center justify-center'>
+            <table className='table-auto'>
+              <thead className='text-xl'>
+                <tr>
+                  <th className="px-4 py-2">Position</th>
+                  <th className="px-4 py-2">Symbol</th>
+                  <th className="px-4 py-2">Name</th>
+                  <th className="px-4 py-2">Price (USD)</th>
+                  <th className="px-4 py-2">% Change in 1h</th>
+                  <th className="px-4 py-2">% Change in 24h</th>
+                  <th className="px-4 py-2">% Change in 7d</th>
+                </tr>
+              </thead>
+              <tbody>
+              {data.map(item => (
+                <tr key={item.name}>
+                  <td className="border px-4 py-2">{item.market_cap_rank}</td>
+                  <td className="border px-4 py-2 items-center"><img className='justify-center' src={item.image} alt='coin name' width='20' /></td>
+                  <td className="border px-4 py-2">
+                      <a className='text-purple-600 font-medium hover:text-red-800' href={'https://www.coingecko.com/en/coins/' + item.id}>
+                        {item.name}
+                      </a>
+                  </td>
+                  <td className="border px-4 py-2">${Math.round(item.current_price * 1000) / 1000}</td>
+                  <td className={item.price_change_percentage_1h_in_currency >= 0 ? 'text-green-500 border px-4 py-2' : 'text-red-500 border px-4 py-2'}>{Math.round(item.price_change_percentage_1h_in_currency * 100) / 100}%</td>
+                  <td className={item.price_change_percentage_24h_in_currency >= 0 ? 'text-green-500 border px-4 py-2' : 'text-red-500 border px-4 py-2'}>{Math.round(item.price_change_percentage_24h_in_currency * 100) / 100}%</td>
+                  <td className={item.price_change_percentage_7d_in_currency >= 0 ? 'text-green-500 border px-4 py-2' : 'text-red-500 border px-4 py-2'}>{Math.round(item.price_change_percentage_7d_in_currency * 100) / 100}%</td>
+                </tr>
+            ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       );
     }
