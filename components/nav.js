@@ -10,16 +10,18 @@ const links = [
 export default function Nav() {
   return (
     <nav>
-      <ul className="flex justify-between items-center p-8">
+      <ul className='flex justify-between items-center p-8'>
         <li>
-          <Link href="/">
-            <a className="bg-transparent hover:bg-purple-600 text-purple-600 font-semibold hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded">Home</a>
+          <Link href='/'>
+            <a className='bg-transparent hover:bg-purple-600 text-purple-600 font-semibold hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded'>Home</a>
           </Link>
         </li>
-        <ul className="flex justify-between items-center space-x-4">
+
+        <ul className='flex justify-between items-center space-x-4'>
+        <li className='text-purple-600 font-semibold '>Resources Used:</li>
           {links.map(({ href, label }) => (
             <li key={`${href}${label}`}>
-              <a href={href} className="bg-transparent hover:bg-purple-600 text-purple-600 font-semibold hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded">
+              <a href={href} className='bg-transparent hover:bg-purple-600 text-purple-600 font-semibold hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded'>
                 {label}
               </a>
             </li>
