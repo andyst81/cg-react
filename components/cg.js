@@ -176,7 +176,6 @@ class CoinGecko extends React.Component {
               </tbody>
             </table>
           </div>
-        </div>
       );
     }
   }
