@@ -3,7 +3,7 @@ import Link from 'next/link'
 const links = [
   { href: 'https://coingecko.com', label: 'CoinGecko' },
   { href: 'https://vercel.com', label: 'Vercel' },
-  { href: 'https://tailwind.com', label: 'Tailwind' },
+  { href: 'https://tailwindcss.com', label: 'Tailwind' },
   { href: 'https://bootlegninja.space', label: 'My Site' },
 ]
 
