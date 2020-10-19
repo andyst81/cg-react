@@ -65,6 +65,8 @@ class CoinGecko extends React.Component {
     })
   };
 
+  
+
   render() {
     const { error, isLoaded, data } = this.state;
     if (error) {
@@ -127,13 +129,18 @@ class CoinGecko extends React.Component {
             <table className='table-auto'>
               <thead className='text-xl'>
                 <tr>
-                  <th className="px-4 py-2">Position</th>
-                  <th className="px-4 py-2">Symbol</th>
-                  <th className="px-4 py-2">Name</th>
-                  <th className="px-4 py-2">Price (USD)</th>
-                  <th className={"px-4 py-2 " + (this.state.hourShow ? '' : 'checked' )}>% Change in 1h</th>
-                  <th className={"px-4 py-2 " + (this.state.dayShow ? '' : 'checked' )}>% Change in 24h</th>
-                  <th className={"px-4 py-2 " + (this.state.weekShow ? '' : 'checked' )}>% Change in 7d</th>
+                  <th className="border px-4 py-2">Position</th>
+                  <th className="border px-4 py-2">Symbol</th>
+                  <th className="border px-4 py-2">Name
+                    <div className='inline-flex'>
+                      <svg xmlns="http://www.w3.org/2000/svg" height='14px' width='14px' className='self-center' viewBox="0 0 20 20"><path d="M9 16.172l-6.071-6.071-1.414 1.414L10 20l.707-.707 7.778-7.778-1.414-1.414L11 16.172V0H9z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" height='14px' width='14px' className='self-center' viewBox="0 0 20 20"><path d="M9 3.828L2.929 9.899 1.515 8.485 10 0l.707.707 7.778 7.778-1.414 1.414L11 3.828V20H9V3.828z"/></svg>
+                    </div>
+                  </th>
+                  <th className="border px-4 py-2">Price (USD)</th>
+                  <th className={"border px-4 py-2 " + (this.state.hourShow ? '' : 'checked' )}>% Change in 1h</th>
+                  <th className={"border px-4 py-2 " + (this.state.dayShow ? '' : 'checked' )}>% Change in 24h</th>
+                  <th className={"border px-4 py-2 " + (this.state.weekShow ? '' : 'checked' )}>% Change in 7d</th>
                 </tr>
               </thead>
               <tbody>
