@@ -17,7 +17,7 @@ export default function Nav() {
           </Link>
         </li>
 
-        <ul className='flex justify-between items-center space-x-4'>
+        <ul className='flex justify-between items-center sm:space-x-0 md:space-x-4'>
         <li className='text-purple-600 font-semibold '>Resources Used:</li>
           {links.map(({ href, label }) => (
             <li key={`${href}${label}`}>

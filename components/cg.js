@@ -75,7 +75,7 @@ class CoinGecko extends React.Component {
       return (
         <div>
           {/* Show other options button */}
-          <div className='flex items-center justify-center'>
+          <div className='flex items-center justify-center pb-4'>
             <Link href="/">
               <a className="bg-transparent hover:bg-purple-600 text-purple-600 font-semibold
                 hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded"
@@ -115,7 +115,7 @@ class CoinGecko extends React.Component {
             </div>
           </form>
           {/* Reset button */}
-          <div className={'flex items-center justify-center ' + (this.state.allShow ? '' : 'checked')}>
+          <div className={'flex items-center justify-center p-4 ' + (this.state.allShow ? '' : 'checked')}>
           <Link href="/">
               <a className="bg-transparent hover:bg-red-600 text-red-600 font-semibold
                 hover:text-white py-2 px-4 border border-red-600 hover:border-transparent rounded"
