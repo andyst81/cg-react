@@ -7,8 +7,8 @@
 /* Stop purging. */
 
 /* Write you own custom component styles here */
-.btn-blue {
-  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+a {
+  color: text-blue-600;
 }
 
 /* Start purging... */
@@ -19,9 +19,4 @@
 
 .checked {
   display: none;
-}
-
-.container {
-  padding: 0 1rem;
-  margin: 3rem auto 6rem;
 }
