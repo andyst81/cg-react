@@ -5,6 +5,7 @@ console.log(children);
 return false;
 };
 
+
 class CoinGecko extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ class CoinGecko extends React.Component {
       error: null,
       isLoaded: false,
       data: [],
+      number: 250,
       hourPercent: null,
       dayPercent: null,
       weekPercent: null,
@@ -22,9 +24,11 @@ class CoinGecko extends React.Component {
     };
   };
 
-
   componentDidMount() {
-    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d')
+
+    let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=' + this.state.number + '&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d'
+
+    fetch(url)
       .then(res => res.json())
       .then(
         (result) => {
@@ -44,28 +48,38 @@ class CoinGecko extends React.Component {
         }
       )
   };
+
   // Function to set the input that controls whether the column (1h, 24h, 7d) is shown
   setInput = (key) => (event) => {
     this.setState(prevState => ({ [key]: !prevState.[key] }));
   };
+
   // Function to set the percentage shown
   setPercentage = (key) => (event) => {
-     this.setState({ [key]: event.target.value})
+     this.setState({ [key]: event.target.value});
   };
+
+  // Function to change the number of coins called and reset screen
+  setNumber = (event) => {
+    this.setState({
+      number: event.target.value});
+    <ConsoleLog>{this.state.number}</ConsoleLog>
+  };
+
   // Function to reset all values back to the original state and clear inputs
   resetScreen() {
     document.getElementById('setting').reset();
+    document.getElementById('numbers').reset();
     this.setState({
       hourPercent: null,
       dayPercent: null,
       weekPercent: null,
       hourShow: true,
       dayShow: true,
-      weekShow: true
+      weekShow: true,
+      number: 250
     })
   };
-
-  
 
   render() {
     const { error, isLoaded, data } = this.state;
@@ -76,6 +90,7 @@ class CoinGecko extends React.Component {
     } else {
       return (
         <div>
+
           {/* Show other options button */}
           <div className='flex items-center justify-center pb-4'>
             <Link href="/">
@@ -84,47 +99,65 @@ class CoinGecko extends React.Component {
                 onClick={this.setInput('allShow')}>{this.state.allShow ? 'Hide' : 'Show'} Options</a>
             </Link>
           </div>
-          <form id='setting' className={"grid grid-cols-3 gap-4 py-2 " + (this.state.allShow ? '' : 'checked')}>
-            {/* Logic to arrange the hourly data */}
-            <div className='border-solid border-2 border-purple-300 rounded p-4 text-center'>
-              <h1 className="text-xl font-semibold underline">Hourly</h1>
-              <span>Hourly percentage ></span>
-              <input type='number' className='px-4 py-3 w-32' placeholder='Show all' name='hourPercent' value={this.props.value}
-                onChange={this.setPercentage('hourPercent')}></input> %
-              <br/>
-              <input type="checkbox" id="hour" name="hour" value="1 Hour" onChange={this.setInput('hourShow')} />
-              <label className='px-4 py-3' htmlFor="hour">Remove hourly % change</label>
-            </div>
-            {/* Logic to arrange the daily data */}
-            <div className='border-solid border-2 border-purple-300 rounded p-4 text-center'>
-              <h1 className="text-xl font-semibold underline">Daily</h1>
-              <span>Daily percentage ></span>
-              <input type='number' className='px-4 py-3 w-32' placeholder='Show all' name='dayPercent' value={this.props.value}
-                onChange={this.setPercentage('dayPercent')}></input> %
-              <br/>
-              <input type="checkbox" id="day" name="day" value="1 Day" onChange={this.setInput('dayShow')} />
-              <label htmlFor="day">Remove daily % change</label>
-            </div>
-            {/* Logic to arrange the weekly data */}
-            <div className='border-solid border-2 border-purple-300 rounded p-4 text-center'>
-              <h1 className="text-xl font-semibold underline">Weekly</h1>
-              <span>Weekly percentage ></span>
-              <input type='number' className='px-4 py-3 w-32' placeholder='Show all' name='weekPercent'
-              value={this.props.value} onChange={this.setPercentage('weekPercent')}></input>
-              <br/>
-              <input type="checkbox" id="week" name="week" value="1 Week" onChange={this.setInput('weekShow')} />
-              <label htmlFor="week">Remove weekly % change</label> %
-            </div>
-          </form>
-          {/* Reset button */}
-          <div className={'flex items-center justify-center p-4 ' + (this.state.allShow ? '' : 'checked')}>
-          <Link href="/">
-              <a className="bg-transparent hover:bg-red-600 text-red-600 font-semibold
-                hover:text-white py-2 px-4 border border-red-600 hover:border-transparent rounded"
-                onClick={() => this.resetScreen()}>Reset Screen</a>
-            </Link>
+
+          <div className={this.state.allShow ? '' : 'checked'}>
+            <div id='numbers'>
+              <span>Total Number of Coins</span>
+              <input type='number' className='px-4 py-3 w-32' placeholder='250' name='number' value={this.props.value} 
+              onChange={this.setNumber} />
+              <input type='submit' value='Recall Data' className='bg-transparent hover:bg-purple-600 text-purple-600 
+                font-semibold hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded'
+                
+                />
             </div>
 
+            <form id='setting' className="grid grid-cols-3 gap-4 py-2">
+
+              {/* Logic to arrange the hourly data */}
+              <div className='border-solid border-2 border-purple-300 rounded p-4 text-center'>
+                <h1 className="text-xl font-semibold underline">Hourly</h1>
+                <span>Hourly percentage ></span>
+                <input type='number' className='px-4 py-3 w-32' placeholder='Show all' name='hourPercent' value={this.props.value}
+                  onChange={this.setPercentage('hourPercent')} /> %
+                <br/>
+                <input type="checkbox" id="hour" name="hour" value="1 Hour" onChange={this.setInput('hourShow')} />
+                <label className='px-4 py-3' htmlFor="hour">Remove hourly % change</label>
+              </div>
+
+              {/* Logic to arrange the daily data */}
+              <div className='border-solid border-2 border-purple-300 rounded p-4 text-center'>
+                <h1 className="text-xl font-semibold underline">Daily</h1>
+                <span>Daily percentage ></span>
+                <input type='number' className='px-4 py-3 w-32' placeholder='Show all' name='dayPercent' value={this.props.value}
+                  onChange={this.setPercentage('dayPercent')} /> %
+                <br/>
+                <input type="checkbox" id="day" name="day" value="1 Day" onChange={this.setInput('dayShow')} />
+                <label htmlFor="day">Remove daily % change</label>
+              </div>
+
+              {/* Logic to arrange the weekly data */}
+              <div className='border-solid border-2 border-purple-300 rounded p-4 text-center'>
+                <h1 className="text-xl font-semibold underline">Weekly</h1>
+                <span>Weekly percentage ></span>
+                <input type='number' className='px-4 py-3 w-32' placeholder='Show all' name='weekPercent'
+                  value={this.props.value} onChange={this.setPercentage('weekPercent')} />
+                <br/>
+                <input type="checkbox" id="week" name="week" value="1 Week" onChange={this.setInput('weekShow')} />
+                <label htmlFor="week">Remove weekly % change</label> %
+              </div>
+            </form>
+
+            {/* Reset button */}
+            <div className='flex items-center justify-center p-4'>
+              <Link href="/">
+                <a className="bg-transparent hover:bg-red-600 text-red-600 font-semibold
+                  hover:text-white py-2 px-4 border border-red-600 hover:border-transparent rounded"
+                  onClick={() => this.resetScreen()}>Reset Screen</a>
+              </Link>
+            </div>
+
+          </div>
+          
           <div className='container mx-auto flex items-center justify-center'>
             <table className='table-auto'>
               <thead className='text-xl'>
@@ -158,7 +191,7 @@ class CoinGecko extends React.Component {
                       alt='coin name' width='20' /></td>
                     <td className="border px-4 py-2">
                         <a className='text-purple-600 font-medium hover:text-red-800'
-                          href={'https://www.coingecko.com/en/coins/' + item.id}>
+                          href={'/coins/' + item.id}>
                           {item.name}
                         </a>
                     </td>
