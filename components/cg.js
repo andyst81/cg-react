@@ -101,15 +101,14 @@ class CoinGecko extends React.Component {
           </div>
 
           <div className={this.state.allShow ? '' : 'checked'}>
-            <div id='numbers'>
+            {/* <div id='numbers'>
               <span>Total Number of Coins</span>
               <input type='number' className='px-4 py-3 w-32' placeholder='250' name='number' value={this.props.value} 
               onChange={this.setNumber} />
               <input type='submit' value='Recall Data' className='bg-transparent hover:bg-purple-600 text-purple-600 
                 font-semibold hover:text-white py-2 px-4 border border-purple-600 hover:border-transparent rounded'
-                
                 />
-            </div>
+            </div> */}
 
             <form id='setting' className="grid grid-cols-3 gap-4 py-2">
 
@@ -164,12 +163,7 @@ class CoinGecko extends React.Component {
                 <tr>
                   <th className="border px-4 py-2">Position</th>
                   <th className="border px-4 py-2">Symbol</th>
-                  <th className="border px-4 py-2">Name
-                    <div className='inline-flex'>
-                      <svg xmlns="http://www.w3.org/2000/svg" height='14px' width='14px' className='self-center' viewBox="0 0 20 20"><path d="M9 16.172l-6.071-6.071-1.414 1.414L10 20l.707-.707 7.778-7.778-1.414-1.414L11 16.172V0H9z"/></svg>
-                      <svg xmlns="http://www.w3.org/2000/svg" height='14px' width='14px' className='self-center' viewBox="0 0 20 20"><path d="M9 3.828L2.929 9.899 1.515 8.485 10 0l.707.707 7.778 7.778-1.414 1.414L11 3.828V20H9V3.828z"/></svg>
-                    </div>
-                  </th>
+                  <th className="border px-4 py-2">Name</th>
                   <th className="border px-4 py-2">Price (USD)</th>
                   <th className={"border px-4 py-2 " + (this.state.hourShow ? '' : 'checked' )}>% Change in 1h</th>
                   <th className={"border px-4 py-2 " + (this.state.dayShow ? '' : 'checked' )}>% Change in 24h</th>
